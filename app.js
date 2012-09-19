@@ -136,3 +136,6 @@ app.get('/footprints', function(req, res) {
  * @see http://nodejs.org/api/modules.html
  */
 module.exports = app;
+
+console.log('e.g', new Buffer(JSON.stringify({emid:'mm020qj', psid:'t0m1khspy'})).toString('base64'));
+
