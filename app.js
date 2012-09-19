@@ -15,7 +15,7 @@ var express = require('express')
 
 mongoose.connect('mongodb://localhost/footprints');
 
-var FootprintSchema = mongoose.schema({
+var FootprintSchema = mongoose.Schema({
 	emid: String,
 	psid: String,
 	created: {type: Date, default: Date.now }
@@ -56,7 +56,8 @@ app.param('content', function(req, res, next, content) {
 		req.content = JSON.parse(new Buffer(content, 'base64').toString('ascii'));
 	}
 	catch(e) {
-		return res.status(400).end(JSON.stringify({error: e}));
+		console.error(e);
+		return res.status(400).end(JSON.stringify({error: e.toString()}));
 	}
 
 	//move onto the next route
