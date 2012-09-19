@@ -89,23 +89,15 @@ app.configure('development', function(){
  * Support the "content" parameter
  *
  * @see http://expressjs.com/api.html#app.param
+ * @see http://nodejs.org/api/buffer.html
  */
 app.param('content', function(req, res, next, content) {
 	try {
-		
-		/**
-		 * This block will use a Buffer object to decode the base64
-		 * JSON string
-		 *
-		 * @see http://nodejs.org/api/buffer.html
-		 */
 		req.content = JSON.parse(new Buffer(content, 'base64').toString('ascii'));
 	}
 	catch(e) {
 		return res.status(400).end(JSON.stringify({error: e.toString()}));
 	}
-
-	//move onto the next route
 	next();
 });
 
